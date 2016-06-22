@@ -5,4 +5,11 @@
   font-family: var(--font-family, Arial);
   font-size: 1.75em;
   font-weight: 100;
+  text-align: center;
+}
+
+.icon {
+  display: inline-block;
+  margin: 0 1em;
+  width: 5em;
 }
