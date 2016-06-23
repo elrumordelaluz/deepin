@@ -8,16 +8,17 @@ import { deepIn } from '../lib';
 
 class App extends Component {
   render () {
-    deepIn(strokedIcon)
+    const strokeChanged = deepIn(strokedIcon, 'red');
+    const fillChanged = deepIn(filledIcon, 'green')
     return (
       <div className="app">
 
         <div className="icon">
-          <Element obj={strokedIcon} />
+          <Element obj={strokeChanged.paths} />
         </div>
 
         <div className="icon">
-          <Element obj={filledIcon} />
+          <Element obj={fillChanged.paths} />
         </div>
 
       </div>
