@@ -1,5 +1,9 @@
 @import './shared/styles/_config';
 
+body {
+  margin: 0;
+}
+
 .app {
   color: var(--main-color, red);
   font-family: var(--font-family, Arial);
@@ -12,4 +16,19 @@
   display: inline-block;
   margin: 0 1em;
   width: 5em;
+}
+
+.controls {
+  width: 100%;
+  background-color: #f7f7f7;
+  padding: 1em;
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.colorpicker {
+  position: relative;
+  width: 50%;
+  height: 200px;
+  display: inline-block;
 }
