@@ -7,6 +7,7 @@ const deepColor = (icon, color, isStroke = false, layer = 'all') => {
 
   const customizer = (val, key, obj, stack) => {
     const filter = () => key === pathType && val !== 'none' ? color : undefined
+
     if (layer !== 'all') {
       if (obj && obj.hasOwnProperty(sel) && obj[sel] === layer) {
         return filter()
@@ -21,4 +22,17 @@ const deepColor = (icon, color, isStroke = false, layer = 'all') => {
 
 export const deepInColor = (icon, color, layer) => {
   return deepColor(icon, color, icon.style === 'stroke', layer)
+}
+
+const deepStroke = (icon, obj) => {
+  const customizer = (val, key) => {
+    if (key in obj) {
+      return obj[key]
+    }
+  }
+  return cloneDeepWith(icon, customizer)
+}
+
+export const deepInStroke = (icon, obj) => {
+  return deepStroke(icon, obj)
 };
