@@ -1,15 +1,24 @@
 import cloneDeepWith from 'lodash/cloneDeepWith';
 
-const deepColor = (paths, color, isStroke = false) => {
-  const modifier = isStroke ? 'stroke' : 'fill';
-  const customizer = (val, key) => {
-    if (key === modifier && val !== 'none') {
-      return color;
+const deepColor = (icon, color, isStroke = false, layer = 'all') => {
+  const pathType = isStroke ? 'stroke' : 'fill'
+  const modifier = layer !== 'all' ? layer : null;
+  const sel = 'id';
+
+  const customizer = (val, key, obj, stack) => {
+    const filter = () => key === pathType && val !== 'none' ? color : undefined
+    if (layer !== 'all') {
+      if (obj && obj.hasOwnProperty(sel) && obj[sel] === layer) {
+        return filter()
+      }
+    } else {
+      return filter()
     }
   }
-  return cloneDeepWith(paths, customizer);
+
+  return cloneDeepWith(icon, customizer)
 };
 
-export const deepIn = (icon, color) => {
-  return deepColor(icon, color, icon.style === 'stroke')
+export const deepInColor = (icon, color, layer) => {
+  return deepColor(icon, color, icon.style === 'stroke', layer)
 };

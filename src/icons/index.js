@@ -40,20 +40,22 @@ export const filledIcon = {
     childs: [
       {
         name: "g",
-        attrs: {
-          fill: "#202020"
-        },
+        attrs: {},
         childs: [
           {
             name: "path",
             attrs: {
-              d: "M50 0H0v50h10V10h40z"
+              id: "color-1",
+              d: "M50 0H0v50h10V10h40z",
+              fill: "#202020",
             }
           },
           {
             name: "path",
             attrs: {
-              d: "M14 14v50h50V14H14zm38 27H41v11c0 1.1-.9 2-2 2s-2-.9-2-2V41H26c-1.1 0-2-.9-2-2s.9-2 2-2h11V26c0-1.1.9-2 2-2s2 .9 2 2v11h11c1.1 0 2 .9 2 2s-.9 2-2 2z"
+              id: "color-2",
+              d: "M14 14v50h50V14H14zm38 27H41v11c0 1.1-.9 2-2 2s-2-.9-2-2V41H26c-1.1 0-2-.9-2-2s.9-2 2-2h11V26c0-1.1.9-2 2-2s2 .9 2 2v11h11c1.1 0 2 .9 2 2s-.9 2-2 2z",
+              fill: "#202020",
             }
           }
         ]

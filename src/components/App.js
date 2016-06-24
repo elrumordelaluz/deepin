@@ -4,12 +4,12 @@ import appStyles from './App.css';
 import Element from './shared/Element';
 import { strokedIcon, filledIcon } from '../icons';
 
-import { deepIn } from '../lib';
+import { deepInColor } from '../lib';
 
 class App extends Component {
   render () {
-    const strokeChanged = deepIn(strokedIcon, 'red');
-    const fillChanged = deepIn(filledIcon, 'green')
+    const strokeChanged = deepInColor(strokedIcon, 'red');
+    const fillChanged = deepInColor(filledIcon, 'green', 'color-2')
     return (
       <div className="app">
 
