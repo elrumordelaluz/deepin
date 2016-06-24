@@ -1,4 +1,5 @@
 import cloneDeepWith from 'lodash/cloneDeepWith';
+import hasIn from 'lodash/hasIn';
 
 const deepColor = (icon, color, isStroke = false, layer = 'all') => {
   const pathType = isStroke ? 'stroke' : 'fill'
@@ -26,7 +27,7 @@ export const deepInColor = (icon, color, layer) => {
 
 const deepStroke = (icon, obj) => {
   const customizer = (val, key) => {
-    if (key in obj) {
+    if (hasIn(obj, key)) {
       return obj[key]
     }
   }
