@@ -36,7 +36,7 @@ class App extends Component {
   handleChangeColor2 (color) {
     this.setState({
       color2: color.hex,
-      iconFill: deepInColor(this.state.iconFill, color.hex, this.state.showSecondary ? 'color-2' : 'all')
+      iconFill: deepInColor(this.state.iconFill, color.hex, 'color-2')
     })
   }
 
