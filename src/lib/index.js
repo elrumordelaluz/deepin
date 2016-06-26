@@ -6,7 +6,6 @@ const deepColor = (icon, color, isStroke = false, layer = 'all', sel = 'id') => 
   const pathType = isStroke ? 'stroke' : 'fill'
   const modifier = layer !== 'all' ? layer : null;
   const regex = /^\!/;
-  // console.log(regex.test(layer))
 
   const customizer = (val, key, obj, stack) => {
     const filter = () => key === pathType && val !== 'none' ? color : undefined
