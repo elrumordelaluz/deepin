@@ -2,6 +2,15 @@ import cloneDeepWith from 'lodash/cloneDeepWith';
 import hasIn from 'lodash/hasIn';
 import has from 'lodash/has';
 
+/**
+ * Loop inside Icon Object to modify stroke/fill color based on specified layer
+ * @param  {Object}  icon
+ * @param  {String}  color    Valid color String
+ * @param  {Boolean} isStroke
+ * @param  {String}  layer  'all' / 'color-1' ...
+ * @param  {String}
+ * @return {Object} Returns Object with color modified
+ */
 const deepColor = (icon, color, isStroke = false, layer = 'all', sel = 'id') => {
   const pathType = isStroke ? 'stroke' : 'fill'
   const modifier = layer !== 'all' ? layer : null;
