@@ -31,8 +31,29 @@ const deepColor = (icon, color, isStroke = false, layer = 'all', sel = 'id') => 
   return cloneDeepWith(icon, customizer)
 };
 
-export const deepInColor = (icon, color, layer) => {
-  return deepColor(icon, color, icon.style === 'stroke', layer)
+const deepColorInverse = (icon, color, isStroke = false, layer = null, sel = 'id') => {
+  const pathType = isStroke ? 'stroke' : 'fill'
+  const modifier = layer !== 'all' ? layer : null;
+
+  const customizer = (val, key, obj, stack) => {
+    const filter = () => key === pathType && val !== 'none' ? color : undefined
+
+    if (layer) {
+      if (obj && has(obj, sel) && obj[sel] !== layer || !has(obj, sel)) {
+        return filter()
+      }
+    } else {
+      return filter()
+    }
+  }
+
+  return cloneDeepWith(icon, customizer)
+};
+
+export const deepInColor = (icon, color, layer, inverse = false) => {
+  return inverse ?
+    deepColorInverse(icon, color, icon.style === 'stroke', layer) :
+    deepColor(icon, color, icon.style === 'stroke', layer);
 }
 
 export const deepInStroke = (icon, obj) => {

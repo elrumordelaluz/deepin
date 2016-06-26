@@ -8,7 +8,6 @@ export const strokedIcon = {
       {
         name: "g",
         attrs: {
-          id: "color-1",
           stroke: "#202020",
           fill: "none",
         },
