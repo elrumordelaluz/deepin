@@ -29,22 +29,20 @@ class App extends Component {
   handleChangeColor1 (color) {
     this.setState({
       color1: color.hex,
-      iconFill: deepInColor(this.state.iconFill, color.hex, this.state.showSecondary ? 'color-1' : 'all')
+      iconFill: deepInColor(this.state.iconFill, color.hex, this.state.showSecondary ? 'color-1' : 'all'),
+      iconStroke: deepInColor(this.state.iconStroke, color.hex, this.state.showSecondary ? 'color-1' : 'all')
     })
   }
 
   handleChangeColor2 (color) {
     this.setState({
       color2: color.hex,
-      iconFill: deepInColor(this.state.iconFill, color.hex, 'color-2')
+      iconFill: deepInColor(this.state.iconFill, color.hex, 'color-2'),
+      iconStroke: deepInColor(this.state.iconStroke, color.hex, 'color-2'),
     })
   }
 
   render () {
-    const strokeChanged = deepInColor(
-      deepInStroke(strokedIcon, { strokeWidth: 3 }),
-      'blue');
-    const fillChanged = deepInColor(filledIcon, 'green', 'accent-color')
     return (
       <div className="app">
         <div className="controls">
