@@ -5,41 +5,23 @@ import has from 'lodash/has';
 /**
  * Loop inside Icon Object to modify stroke/fill color based on specified layer
  * @param  {Object}  icon
- * @param  {String}  color    Valid color String
+ * @param  {String}  color       ie. Valid color] TODO: check
  * @param  {Boolean} isStroke
- * @param  {String}  layer  'all' / 'color-1' ...
- * @param  {String}
- * @return {Object} Returns Object with color modified
+ * @param  {String|null}  layer  ie. null || 'color-1'...
+ * @param  {String}  selector    ie. 'id'
+ * @param  {Boolean}  inverse
+ * @return {Object}  Returns Object with color modified
  */
-const deepColor = (icon, color, isStroke = false, layer = 'all', sel = 'id') => {
+const deepColor = (icon, color, isStroke = false, layer = null, selector = 'id', inverse = false) => {
   const pathType = isStroke ? 'stroke' : 'fill'
-  const modifier = layer !== 'all' ? layer : null;
-  const regex = /^\!/;
-
   const customizer = (val, key, obj, stack) => {
     const filter = () => key === pathType && val !== 'none' ? color : undefined
-
-    if (layer !== 'all') {
-      if (obj && has(obj, sel) && obj[sel] === layer) {
-        return filter()
-      }
-    } else {
-      return filter()
-    }
-  }
-
-  return cloneDeepWith(icon, customizer)
-};
-
-const deepColorInverse = (icon, color, isStroke = false, layer = null, sel = 'id') => {
-  const pathType = isStroke ? 'stroke' : 'fill'
-  const modifier = layer !== 'all' ? layer : null;
-
-  const customizer = (val, key, obj, stack) => {
-    const filter = () => key === pathType && val !== 'none' ? color : undefined
+    const condition = inverse ?
+      has(obj, selector) && obj[selector] !== layer || !has(obj, selector) :
+      has(obj, selector) && obj[selector] === layer
 
     if (layer) {
-      if (obj && has(obj, sel) && obj[sel] !== layer || !has(obj, sel)) {
+      if (obj && condition) {
         return filter()
       }
     } else {
@@ -51,9 +33,7 @@ const deepColorInverse = (icon, color, isStroke = false, layer = null, sel = 'id
 };
 
 export const deepInColor = (icon, color, layer, inverse = false) => {
-  return inverse ?
-    deepColorInverse(icon, color, icon.style === 'stroke', layer) :
-    deepColor(icon, color, icon.style === 'stroke', layer);
+  return deepColor(icon, color, icon.style === 'stroke', layer, 'id', inverse)
 }
 
 export const deepInStroke = (icon, obj) => {
