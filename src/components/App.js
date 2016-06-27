@@ -18,6 +18,9 @@ class App extends Component {
     this.handleToggleSecondary = this.handleToggleSecondary.bind(this);
     this.handleChangeColor1 = this.handleChangeColor1.bind(this);
     this.handleChangeColor2 = this.handleChangeColor2.bind(this);
+    this.handleChangeStrokeWidth = this.handleChangeStrokeWidth.bind(this);
+    this.handleChangeStrokeLinecap = this.handleChangeStrokeLinecap.bind(this);
+    this.handleChangeStrokeLinejoin = this.handleChangeStrokeLinejoin.bind(this);
   }
 
   handleToggleSecondary () {
@@ -42,11 +45,82 @@ class App extends Component {
     })
   }
 
+  handleChangeStrokeWidth (event) {
+    this.setState({
+      iconStroke: deepInStroke(this.state.iconStroke, {
+        strokeWidth: event.target.value
+      })
+    })
+  }
+
+  handleChangeStrokeLinejoin (event) {
+    this.setState({
+      iconStroke: deepInStroke(this.state.iconStroke, {
+        strokeLinejoin: event.target.value
+      })
+    })
+  }
+
+  handleChangeStrokeLinecap (event) {
+    this.setState({
+      iconStroke: deepInStroke(this.state.iconStroke, {
+        strokeLinecap: event.target.value
+      })
+    })
+  }
+
   render () {
     return (
       <div className="app">
         <div className="controls">
-          <button onClick={this.handleToggleSecondary}>Show secondary</button>
+          width
+          <input
+            type="number"
+            defaultValue="1"
+            max="4"
+            min="1"
+            step="1"
+            onChange={this.handleChangeStrokeWidth}/>
+          {' '}
+          linecap
+          {' '}
+          <label>
+            round
+            <input
+              type="radio"
+              name="linecap"
+              onChange={this.handleChangeStrokeLinecap}
+              value="round"/>
+          </label>
+          <label>
+            square
+            <input
+              type="radio"
+              name="linecap"
+              onChange={this.handleChangeStrokeLinecap}
+              value="square"/>
+          </label>
+          {' '}
+          linejoin
+          {' '}
+          <label>
+            round
+            <input
+              type="radio"
+              name="linejoin"
+              onChange={this.handleChangeStrokeLinejoin}
+              value="round"/>
+          </label>
+          <label>
+            miter
+            <input
+              type="radio"
+              name="linejoin"
+              onChange={this.handleChangeStrokeLinejoin}
+              value="miter"/>
+          </label>
+
+          <button onClick={this.handleToggleSecondary}>color2</button>
           <div className="pickers">
             <div className="colorpicker">
               <ColorPicker
