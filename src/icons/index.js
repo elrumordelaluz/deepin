@@ -2,7 +2,7 @@ export const strokedIcon = {
   paths: {
     name: "svg",
     attrs: {
-      "viewBox": "0 0 64 64"
+      viewBox: "0 0 64 64"
     },
     childs: [
       {
@@ -36,6 +36,42 @@ export const strokedIcon = {
   },
   style: 'stroke',
 };
+
+export const strokedIconLayers = {
+  paths: {
+    name: "svg",
+    attrs: {
+      xmlns: "http://www.w3.org/2000/svg",
+      viewBox: "0 0 64 64"
+    },
+    childs: [
+      {
+        name: "path",
+        attrs: {
+          id: "color-2",
+          fill: "none",
+          stroke: "#202020",
+          strokeWidth: 1,
+          strokeLinecap: 'round',
+          strokeLinejoin: 'round',
+          d: "M24.8 21.9l-4.5-9.4 39.2 18.2-14.9 6.1-5.9 14.7-7.4-15.8"
+        }
+      },
+      {
+        name: "path",
+        attrs: {
+          fill: "none",
+          stroke: "#202020",
+          strokeWidth: 1,
+          strokeLinecap: 'round',
+          strokeLinejoin: 'round',
+          d: "M4.5 12.5l39.2 18.2-14.9 6-5.9 14.8z"
+        }
+      }
+    ]
+  },
+  style: 'stroke',
+}
 
 export const filledIcon = {
   paths: {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import appStyles from './App.css';
 import ColorPicker from 'coloreact';
 import Element from './shared/Element';
-import { strokedIcon, filledIcon } from '../icons';
+import { strokedIcon, filledIcon, strokedIconLayers } from '../icons';
 import { deepInColor, deepInStroke } from '../lib';
 
 class App extends Component {
@@ -12,6 +12,7 @@ class App extends Component {
       color1: '#f00',
       color2: '#f0f',
       iconStroke: strokedIcon,
+      iconStrokeLayers: strokedIconLayers,
       iconFill: filledIcon,
       showSecondary: false,
     }
@@ -33,7 +34,8 @@ class App extends Component {
     this.setState({
       color1: color.hex,
       iconFill: deepInColor(this.state.iconFill, color.hex, this.state.showSecondary ? 'color-2' : null, true),
-      iconStroke: deepInColor(this.state.iconStroke, color.hex, this.state.showSecondary ? 'color-2' : null, true)
+      iconStroke: deepInColor(this.state.iconStroke, color.hex, this.state.showSecondary ? 'color-2' : null, true),
+      iconStrokeLayers: deepInColor(this.state.iconStrokeLayers, color.hex, this.state.showSecondary ? 'color-2' : null, true)
     })
   }
 
@@ -42,12 +44,16 @@ class App extends Component {
       color2: color.hex,
       iconFill: deepInColor(this.state.iconFill, color.hex, 'color-2'),
       iconStroke: deepInColor(this.state.iconStroke, color.hex, 'color-2'),
+      iconStrokeLayers: deepInColor(this.state.iconStrokeLayers, color.hex, 'color-2'),
     })
   }
 
   handleChangeStrokeWidth (event) {
     this.setState({
       iconStroke: deepInStroke(this.state.iconStroke, {
+        strokeWidth: event.target.value
+      }),
+      iconStrokeLayers: deepInStroke(this.state.iconStrokeLayers, {
         strokeWidth: event.target.value
       })
     })
@@ -57,13 +63,19 @@ class App extends Component {
     this.setState({
       iconStroke: deepInStroke(this.state.iconStroke, {
         strokeLinejoin: event.target.value
-      })
+      }),
+      iconStrokeLayers: deepInStroke(this.state.iconStrokeLayers, {
+        strokeLinejoin: event.target.value
+      }),
     })
   }
 
   handleChangeStrokeLinecap (event) {
     this.setState({
       iconStroke: deepInStroke(this.state.iconStroke, {
+        strokeLinecap: event.target.value
+      }),
+      iconStrokeLayers: deepInStroke(this.state.iconStrokeLayers, {
         strokeLinecap: event.target.value
       })
     })
@@ -139,6 +151,10 @@ class App extends Component {
 
         <div className="icon">
           <Element obj={this.state.iconStroke.paths} />
+        </div>
+
+        <div className="icon">
+          <Element obj={this.state.iconStrokeLayers.paths} />
         </div>
 
         <div className="icon">
