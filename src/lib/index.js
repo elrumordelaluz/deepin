@@ -14,7 +14,7 @@ import has from 'lodash/has';
  */
 const deepColor = (icon, color, isStroke = false, layer = null, selector = 'id', inverse = false) => {
   const pathType = isStroke ? 'stroke' : 'fill'
-  const customizer = (val, key, obj, stack) => {
+  const customizer = (val, key, obj) => {
     const filter = () => key === pathType && val !== 'none' ? color : undefined
     const condition = inverse ?
       has(obj, selector) && obj[selector] !== layer || !has(obj, selector) :
