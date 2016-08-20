@@ -13,13 +13,15 @@ import has from 'lodash/has';
  * @return {Object}  Returns Object with color modified
  */
 const deepColor = (icon, color, isStroke = false, layer = null, selector = 'id', inverse = false) => {
-  const pathType = isStroke ? 'stroke' : 'fill'
-  const customizer = (val, key, obj) => {
-    const filter = () => key === pathType && val !== 'none' ? color : undefined
+  const customizer = (val, key, obj, stack) => {
+    const pathType = has(obj, 'stroke') ? 'stroke' : 'fill'
+    const filter = () => key === pathType && val !== 'none' ? color : undefined;
+    const varToRegex = Array.isArray(layer) ? `(${layer.join('|')})` : layer;
+    const rExp = new RegExp(varToRegex, 'i');
     const condition = inverse ?
-      has(obj, selector) && obj[selector] !== layer || !has(obj, selector) :
-      has(obj, selector) && obj[selector] === layer
-
+      has(obj, selector) && !rExp.test(obj[selector]) || !has(obj, selector) :
+      has(obj, selector) && rExp.test(obj[selector]);
+      
     if (layer) {
       if (obj && condition) {
         return filter()
@@ -32,8 +34,8 @@ const deepColor = (icon, color, isStroke = false, layer = null, selector = 'id',
   return cloneDeepWith(icon, customizer)
 };
 
-export const deepInColor = (icon, color, layer, inverse = false) => {
-  return deepColor(icon, color, icon.style === 'stroke', layer, 'id', inverse)
+export const deepInColor = (icon, color, layer = null, inverse = false) => {
+  return deepColor(icon, color, icon.iconStyle === 'stroke', layer, 'id', inverse)
 }
 
 export const deepInStroke = (icon, obj) => {
